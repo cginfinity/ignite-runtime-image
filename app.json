@@ -16,9 +16,6 @@
 			"options": {
 				"version": "12"
 			}
-		},
-		{
-			"plan": "cgignite-dev"
 		}
 	]
 }
