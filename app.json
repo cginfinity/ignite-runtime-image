@@ -1,0 +1,21 @@
+{
+	"name": "cgignite",
+	"description": "Deploy cgignite runtime using Docker",
+	"repository": "https://github.com/Cybergroup-Research/ignite-runtime-image",
+	"logo": "https://static.wixstatic.com/media/43582c_8ead765f3b624205a3ccdd77adc1ecdc~mv2.png/v1/fill/w_150,h_44,al_c,q_85,usm_0.66_1.00_0.01/Screen%20Shot%202020-06-19%20at%201_31_22%20PM.webp",
+	"keywords": [
+		"node",
+		"docker",
+		"runtime",
+		"cgignite"
+	],
+	"stack": "container",
+	"addons": [
+		{
+			"plan": "heroku-postgresql",
+			"options": {
+				"version": "9.5"
+			}
+		}
+	]
+}
