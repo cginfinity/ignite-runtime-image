@@ -1,7 +1,14 @@
+## cg ignite
+
+An [Integration & Digital Experience (DX) Platform](https://www.cgignite.com/) for your tactical business needs.
+
+## Deploy to Heroku
+
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
-Upgrade Existing Runtime
+## Upgrade Existing Runtime
+
 Make sure you have [Docker](https://www.docker.com/products/docker-desktop), [Git Client](https://git-scm.com/downloads) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
 
 If you haven't already Clone [Runtime](https://github.com/Cybergroup-Research/ignite-runtime-image.git)
@@ -9,7 +16,7 @@ If you haven't already Clone [Runtime](https://github.com/Cybergroup-Research/ig
 git clone https://github.com/Cybergroup-Research/ignite-runtime-image.git
 cd ignite-runtime-image
 ```
-Exiting Cloned Repository
+Existing Cloned Repository
 ```
 cd ignite-runtime-image
 git pull origin master
