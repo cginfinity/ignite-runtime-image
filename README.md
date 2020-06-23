@@ -1,12 +1,18 @@
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
+Upgrade Existing Runtime
+Make sure you have [Docker](https://www.docker.com/products/docker-desktop), [Git Client](https://git-scm.com/downloads) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
 
-Upgrade 
-
+If you haven't already Clone [Runtime](https://github.com/Cybergroup-Research/ignite-runtime-image.git)
 ```sh
-git clone https://github.com/Cybergroup-Research/ignite-runtime-image.git # or clone your own fork
+git clone https://github.com/Cybergroup-Research/ignite-runtime-image.git
 cd ignite-runtime-image
+```
+Exiting Cloned Repository
+```
+cd ignite-runtime-image
+git pull origin master
 ```
 
 If you haven't already, log in to your Heroku account and follow the prompts to create a new SSH public key.
