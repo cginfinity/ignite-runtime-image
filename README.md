@@ -2,7 +2,12 @@
 
 
 
-Upgrade Path
+Upgrade 
+
+```sh
+git clone https://github.com/Cybergroup-Research/ignite-runtime-image.git # or clone your own fork
+cd ignite-runtime-image
+```
 
 If you haven't already, log in to your Heroku account and follow the prompts to create a new SSH public key.
 
