@@ -1,4 +1,4 @@
-## cg ignite
+## Ignite by Cyber Group
 
 An [Integration & Digital Experience (DX) Platform](https://www.cgignite.com/) for your tactical business needs.
 
