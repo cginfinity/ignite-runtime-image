@@ -44,9 +44,8 @@ $ docker build -t . <your-app-name>
 ```
 $ heroku container:push web --app <your-app-name>
 ```
-Deploy the changes
-Release the newly pushed images to deploy your app.
-
+Finally, release your container to your app! 
 ```
 $ heroku container:release web --app <your-app-name>
 ```
+That's it! Happy Low-Coding!
