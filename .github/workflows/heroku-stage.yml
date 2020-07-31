@@ -1,4 +1,4 @@
-name: push to heroku
+name: push to heroku stage
 on:
   push:
     branches:
