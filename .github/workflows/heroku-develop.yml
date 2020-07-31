@@ -1,4 +1,4 @@
-name: push to heroku
+name: push to heroku develop 
 on:
   push:
     branches:
