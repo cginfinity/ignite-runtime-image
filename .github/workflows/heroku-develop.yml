@@ -1,9 +1,8 @@
-name: push to heroku
+name: push to heroku develop 
 on:
   push:
     branches:
       - develop
-      - master
 jobs:
   build:
     runs-on: ubuntu-latest
