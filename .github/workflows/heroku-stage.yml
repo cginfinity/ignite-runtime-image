@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@master
       with:
         fetch-depth: '0'
-    - name: deploy to heroku app ignite core dev
+    - name: deploy to heroku app ignite core stage
       uses: akhileshns/heroku-deploy@v3.2.6
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
