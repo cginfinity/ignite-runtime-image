@@ -1,0 +1,27 @@
+name: push to heroku
+on:
+  push:
+    branches:
+      - develop
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        fetch-depth: '0'
+    - name: deploy to heroku app ignite aux stage
+      uses: akhileshns/heroku-deploy@v3.2.6
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "ignite-aux-stage"
+        heroku_email: "bijay.shah@cygrp.com"
+        usedocker: true
+    - name: deploy to heroku app ignite core dev
+      uses: akhileshns/heroku-deploy@v3.2.6
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "ignite-core-dev"
+        heroku_email: "bijay.shah@cygrp.com"
+        usedocker: true
