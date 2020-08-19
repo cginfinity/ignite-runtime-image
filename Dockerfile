@@ -1,1 +1,1 @@
-FROM cybergroupignite/runtime:v1.0.6
+FROM cybergroupignite/runtime:v1.0.8
