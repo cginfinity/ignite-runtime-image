@@ -38,7 +38,7 @@ $ heroku container:login
 ```
 To push your Docker-based app, build the Dockerfile in the current directory and push the Docker image
 ```
-$ docker build -t . <your-app-name>
+$ docker build . -t <your-app-name>
 ```
 
 ```
