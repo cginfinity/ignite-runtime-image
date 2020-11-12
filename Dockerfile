@@ -1,1 +1,1 @@
-FROM cybergroupignite/runtime:v1.0.14
+FROM cybergroupignite/rc-dev-1.0.16-2b82382
