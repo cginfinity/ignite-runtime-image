@@ -4,7 +4,7 @@ An [Integration & Digital Experience (DX) Platform](https://www.cgignite.com/) f
 
 ## Deploy to Heroku
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Cybergroup-Research/ignite-runtime-image)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Cybergroup-Research/ignite-runtime-image/tree/appmetrics)
 
 
 ## Upgrade Existing Runtime
