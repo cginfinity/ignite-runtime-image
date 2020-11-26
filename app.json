@@ -13,13 +13,13 @@
 	"stack": "container",
 	"addons": [
 		{
-			"plan": "heroku-postgresql",
+			"plan": "heroku-postgresql:standard-0",
 			"options": {
 				"version": "12"
 			}
 		},
 		{
-			"plan": "cgignite"
+			"plan": "cgignite:unlimited"
 		}
 	]
 }
