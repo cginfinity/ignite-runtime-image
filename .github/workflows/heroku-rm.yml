@@ -1,8 +1,8 @@
-name: push to heroku stage
+name: push to heroku rm 
 on:
   push:
     branches:
-      - stage
+      - rm
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,10 +10,10 @@ jobs:
     - uses: actions/checkout@master
       with:
         fetch-depth: '0'
-    - name: deploy to heroku app ignite core stage
+    - name: deploy to heroku app ignite rm test
       uses: akhileshns/heroku-deploy@v3.2.6
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "ignite-core-stage"
+        heroku_app_name: "ignite-rm-test"
         heroku_email: "bijay.shah@cygrp.com"
         usedocker: true

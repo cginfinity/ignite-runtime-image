@@ -1,7 +1,7 @@
 {
 	"name": "CG Ignite Runtime",
 	"description": "Low-Code Integration & Digital Experience Platform.",
-	"repository": "https://github.com/Cybergroup-Research/ignite-runtime-image",
+	"repository": "https://github.com/Cybergroup-Research/ignite-runtime-image/tree/rm",
 	"keywords": [
 		"productivity",
 		"integration",
