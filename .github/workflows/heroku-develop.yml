@@ -24,10 +24,3 @@ jobs:
         heroku_app_name: "ignite-core-dev"
         heroku_email: "bijay.shah@cygrp.com"
         usedocker: true
-    - name: deploy to heroku app ignite onpremise stage
-      uses: akhileshns/heroku-deploy@v3.2.6
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "ignite-onpremise-stage"
-        heroku_email: "bijay.shah@cygrp.com"
-        usedocker: true
