@@ -2,15 +2,12 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "vulnerabilityAssessments_Default_storageContainerPath": {
-            "type": "SecureString"
-        },
-        "serverfarms_CG_Ignite_Demo_Plan_B_name": {
-            "defaultValue": "CG-Ignite-Demo-Plan-B",
+        "App_Service _Plan": {
+            "defaultValue": "Ignite Plan",
             "type": "String"
         },
-        "sites_ignite_azure_demo_web_app_b_name": {
-            "defaultValue": "ignite-azure-demo-web-app-b",
+        "Web_App_Name": {
+            "defaultValue": "Ignite",
             "type": "String"
         }
     },
@@ -19,7 +16,7 @@
         {
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2018-02-01",
-            "name": "[parameters('serverfarms_CG_Ignite_Demo_Plan_B_name')]",
+            "name": "[parameters('App_Service _Plan')]",
             "location": "Central US",
             "sku": {
                 "name": "B1",
@@ -43,27 +40,27 @@
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2018-11-01",
-            "name": "[parameters('sites_ignite_azure_demo_web_app_b_name')]",
+            "name": "[parameters('Web_App_Name')]",
             "location": "Central US",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_CG_Ignite_Demo_Plan_B_name'))]"
+                "[resourceId('Microsoft.Web/serverfarms', parameters('App_Service _Plan'))]"
             ],
             "kind": "app,linux,container",
             "properties": {
                 "enabled": true,
                 "hostNameSslStates": [
                     {
-                        "name": "[concat(parameters('sites_ignite_azure_demo_web_app_b_name'), '.azurewebsites.net')]",
+                        "name": "[concat(parameters('Web_App_Name'), '.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Standard"
                     },
                     {
-                        "name": "[concat(parameters('sites_ignite_azure_demo_web_app_b_name'), '.scm.azurewebsites.net')]",
+                        "name": "[concat(parameters('Web_App_Name'), '.scm.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Repository"
                     }
                 ],
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_CG_Ignite_Demo_Plan_B_name'))]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('App_Service _Plan'))]",
                 "reserved": true,
                 "isXenon": false,
                 "hyperV": false,
@@ -81,10 +78,10 @@
         {
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2018-11-01",
-            "name": "[concat(parameters('sites_ignite_azure_demo_web_app_b_name'), '/web')]",
+            "name": "[concat(parameters('Web_App_Name'), '/web')]",
             "location": "Central US",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_ignite_azure_demo_web_app_b_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('Web_App_Name'))]"
             ],
             "properties": {
                 "numberOfWorkers": 1,
@@ -154,10 +151,10 @@
         {
             "type": "Microsoft.Web/sites/hostNameBindings",
             "apiVersion": "2018-11-01",
-            "name": "[concat(parameters('sites_ignite_azure_demo_web_app_b_name'), '/', parameters('sites_ignite_azure_demo_web_app_b_name'), '.azurewebsites.net')]",
+            "name": "[concat(parameters('Web_App_Name'), '/', parameters('Web_App_Name'), '.azurewebsites.net')]",
             "location": "Central US",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_ignite_azure_demo_web_app_b_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('Web_App_Name'))]"
             ],
             "properties": {
                 "siteName": "ignite-azure-demo-web-app-b",
