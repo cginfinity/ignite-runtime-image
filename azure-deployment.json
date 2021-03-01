@@ -142,6 +142,18 @@
                 "siteConfig": {
                     "appSettings": [ 
                         {
+                            "name" : "IGNITE_EDITOR_API_SECRET",
+                            "value": "[parameters('Env_IGNITE_EDITOR_API_SECRET')]"
+                        },
+                        {
+                            "name" : "DATABASE_URL",
+                            "value": "[parameters('Env_DATABASE_URL')]"
+                        },
+                        {
+                            "name" : "DB_SSL_OPTION",
+                            "value": "[parameters('Env_DB_SSL_OPTION')]"
+                        },
+                        {
                             "name" : "DOCKER_REGISTRY_SERVER_URL",
                             "value": "https://index.docker.io"
                         }
