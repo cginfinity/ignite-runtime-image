@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "App_Service _Plan": {
+        "App_Service_Plan": {
             "defaultValue": "Ignite-Plan",
             "type": "String"
         },
@@ -16,7 +16,7 @@
         {
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2018-02-01",
-            "name": "[parameters('App_Service _Plan')]",
+            "name": "[parameters('App_Service_Plan')]",
             "location": "Central US",
             "sku": {
                 "name": "B1",
@@ -43,7 +43,7 @@
             "name": "[parameters('Web_App_Name')]",
             "location": "Central US",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', parameters('App_Service _Plan'))]"
+                "[resourceId('Microsoft.Web/serverfarms', parameters('App_Service_Plan'))]"
             ],
             "kind": "app,linux,container",
             "properties": {
@@ -60,7 +60,7 @@
                         "hostType": "Repository"
                     }
                 ],
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('App_Service _Plan'))]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('App_Service_Plan'))]",
                 "reserved": true,
                 "isXenon": false,
                 "hyperV": false,
@@ -97,7 +97,7 @@
                     "hostingstart.html"
                 ],
                 "netFrameworkVersion": "v4.0",
-                "linuxFxVersion": "DOCKER|cybergroupignite/runtime:v1.1.2",
+                "linuxFxVersion": "DOCKER|cybergroupignite/runtime:v2.0.0",
                 "requestTracingEnabled": false,
                 "remoteDebuggingEnabled": false,
                 "httpLoggingEnabled": false,
