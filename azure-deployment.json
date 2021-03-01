@@ -6,6 +6,18 @@
             "defaultValue": "Ignite-Plan",
             "type": "String"
         },
+        "App_Service_Plan_SKU": {
+            "type": "string",
+            "defaultValue": "B1",
+            "allowedValues": [
+              "B1",
+              "B2",
+              "B3",
+              "S1",
+              "S2",
+              "S3"
+            ]
+        },
         "Web_App_Name": {
             "defaultValue": "Ignite",
             "type": "String"
@@ -19,10 +31,7 @@
             "name": "[parameters('App_Service_Plan')]",
             "location": "Central US",
             "sku": {
-                "name": "B1",
-                "tier": "Basic",
-                "size": "B1",
-                "family": "B",
+                "name": "[parameters('App_Service_Plan_SKU')]",
                 "capacity": 1
             },
             "kind": "linux",
