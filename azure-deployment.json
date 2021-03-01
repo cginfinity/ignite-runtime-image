@@ -1,0 +1,258 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": "centralus",
+            "allowedValues": [
+                "eastus",
+                "eastus2",
+                "southcentralus",
+                "westus2",
+                "centralus",
+                "northcentralus",
+                "westus",
+                "westcentralus",
+                "westus3",
+                "brazilsouth",
+                "brazilsoutheast",
+                "uaenorth",
+                "uaecentral",
+                "northeurope",
+                "uksouth",
+                "westeurope",
+                "francecentral",
+                "germanywestcentral",
+                "norwayeast",
+                "switzerlandnorth",
+                "francesouth",
+                "germanynorth",
+                "norwaywest",
+                "switzerlandwest",
+                "ukwest",
+                "canadacentral",
+                "canadaeast",
+                "australiaeast",
+                "southeastasia",
+                "centralindia",
+                "eastasia",
+                "japaneast",
+                "koreacentral",
+                "australiacentral",
+                "australiacentral2",
+                "australiasoutheast",
+                "japanwest",
+                "koreasouth",
+                "southindia",
+                "westindia",
+                "southafricanorth",
+                "southafricawest"
+            ]
+        },
+        "App_Service_Plan_Name": {
+            "defaultValue": "Ignite-Plan",
+            "type": "String"
+        },
+        "App_Service_Plan_SKU": {
+            "type": "string",
+            "defaultValue": "B1",
+            "allowedValues": [
+              "B1",
+              "B2",
+              "B3",
+              "S1",
+              "S2",
+              "S3",
+              "P1v2",
+              "P2v2",
+              "P3v2",
+              "P1v3",
+              "P2v3",
+              "P3v3"
+            ]
+        },
+        "Web_App_Name": {
+            "defaultValue": "Ignite",
+            "type": "String"
+        },
+        "Env_DATABASE_URL": {
+            "defaultValue": "",
+            "type": "String"
+        },
+        "Env_IGNITE_EDITOR_API_SECRET": {
+            "defaultValue": "",
+            "type": "String"
+        },
+        "Env_DB_SSL_OPTION": {
+            "defaultValue": "true",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2018-02-01",
+            "name": "[parameters('App_Service_Plan_Name')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "[parameters('App_Service_Plan_SKU')]",
+                "capacity": 1
+            },
+            "kind": "linux",
+            "properties": {
+                "perSiteScaling": false,
+                "maximumElasticWorkerCount": 1,
+                "isSpot": false,
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "targetWorkerCount": 0,
+                "targetWorkerSizeId": 0
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2018-11-01",
+            "name": "[parameters('Web_App_Name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('App_Service_Plan_Name'))]"
+            ],
+            "kind": "app,linux,container",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('Web_App_Name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('Web_App_Name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('App_Service_Plan_Name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "siteConfig": {
+                    "appSettings": [ 
+                        {
+                            "name" : "IGNITE_EDITOR_API_SECRET",
+                            "value": "[parameters('Env_IGNITE_EDITOR_API_SECRET')]"
+                        },
+                        {
+                            "name" : "DATABASE_URL",
+                            "value": "[parameters('Env_DATABASE_URL')]"
+                        },
+                        {
+                            "name" : "DB_SSL_OPTION",
+                            "value": "[parameters('Env_DB_SSL_OPTION')]"
+                        },
+                        {
+                            "name" : "DOCKER_REGISTRY_SERVER_URL",
+                            "value": "https://index.docker.io"
+                        }
+                    ]
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": false,
+                "redundancyMode": "None"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('Web_App_Name'), '/web')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('Web_App_Name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "DOCKER|cybergroupignite/runtime:v2.0.0",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "httpLoggingEnabled": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "azureStorageAccounts": {},
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "ftpsState": "AllAllowed",
+                "reservedInstanceCount": 0
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('Web_App_Name'), '/', parameters('Web_App_Name'), '.azurewebsites.net')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('Web_App_Name'))]"
+            ],
+            "properties": {
+                "siteName": "[parameters('Web_App_Name')]",
+                "hostNameType": "Verified"
+            }
+        }
+    ]
+}
