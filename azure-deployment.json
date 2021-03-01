@@ -75,6 +75,18 @@
         "Web_App_Name": {
             "defaultValue": "Ignite",
             "type": "String"
+        },
+        "Env_DATABASE_URL": {
+            "defaultValue": "",
+            "type": "String"
+        },
+        "Env_IGNITE_EDITOR_API_SECRET": {
+            "defaultValue": "",
+            "type": "String"
+        },
+        "Env_DB_SSL_OPTION": {
+            "defaultValue": "true",
+            "type": "String"
         }
     },
     "variables": {},
@@ -127,7 +139,14 @@
                 "reserved": true,
                 "isXenon": false,
                 "hyperV": false,
-                "siteConfig": {},
+                "siteConfig": {
+                    "appSettings": [ 
+                        {
+                            "name" : "DOCKER_REGISTRY_SERVER_URL",
+                            "value": "https://index.docker.io"
+                        }
+                    ]
+                },
                 "scmSiteAlsoStopped": false,
                 "clientAffinityEnabled": false,
                 "clientCertEnabled": false,
