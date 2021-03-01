@@ -15,7 +15,13 @@
               "B3",
               "S1",
               "S2",
-              "S3"
+              "S3",
+              "P1v2",
+              "P2v2",
+              "P3v2",
+              "P1v3",
+              "P2v3",
+              "P3v3"
             ]
         },
         "Web_App_Name": {
@@ -29,7 +35,6 @@
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2018-02-01",
             "name": "[parameters('App_Service_Plan')]",
-            "location": "Central US",
             "sku": {
                 "name": "[parameters('App_Service_Plan_SKU')]",
                 "capacity": 1
@@ -50,7 +55,6 @@
             "type": "Microsoft.Web/sites",
             "apiVersion": "2018-11-01",
             "name": "[parameters('Web_App_Name')]",
-            "location": "Central US",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/serverfarms', parameters('App_Service_Plan'))]"
             ],
@@ -88,7 +92,6 @@
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2018-11-01",
             "name": "[concat(parameters('Web_App_Name'), '/web')]",
-            "location": "Central US",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('Web_App_Name'))]"
             ],
@@ -161,7 +164,6 @@
             "type": "Microsoft.Web/sites/hostNameBindings",
             "apiVersion": "2018-11-01",
             "name": "[concat(parameters('Web_App_Name'), '/', parameters('Web_App_Name'), '.azurewebsites.net')]",
-            "location": "Central US",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('Web_App_Name'))]"
             ],
