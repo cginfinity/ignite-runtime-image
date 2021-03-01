@@ -186,7 +186,6 @@
                 "httpLoggingEnabled": false,
                 "logsDirectorySizeLimit": 35,
                 "detailedErrorLoggingEnabled": false,
-                "publishingUsername": "$ignite-azure-demo-web-app-b",
                 "azureStorageAccounts": {},
                 "scmType": "None",
                 "use32BitWorkerProcess": true,
@@ -240,7 +239,7 @@
                 "[resourceId('Microsoft.Web/sites', parameters('Web_App_Name'))]"
             ],
             "properties": {
-                "siteName": "ignite-azure-demo-web-app-b",
+                "siteName": "[parameters('Web_App_Name')]",
                 "hostNameType": "Verified"
             }
         }
