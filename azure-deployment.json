@@ -2,32 +2,68 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "ignite_web_app_name": {
-            "defaultValue": "ignite-azure",
+        "vulnerabilityAssessments_Default_storageContainerPath": {
+            "type": "SecureString"
+        },
+        "serverfarms_CG_Ignite_Demo_Plan_B_name": {
+            "defaultValue": "CG-Ignite-Demo-Plan-B",
             "type": "String"
         },
+        "sites_ignite_azure_demo_web_app_b_name": {
+            "defaultValue": "ignite-azure-demo-web-app-b",
+            "type": "String"
+        }
     },
     "variables": {},
     "resources": [
         {
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2018-02-01",
+            "name": "[parameters('serverfarms_CG_Ignite_Demo_Plan_B_name')]",
+            "location": "Central US",
+            "sku": {
+                "name": "B1",
+                "tier": "Basic",
+                "size": "B1",
+                "family": "B",
+                "capacity": 1
+            },
+            "kind": "linux",
+            "properties": {
+                "perSiteScaling": false,
+                "maximumElasticWorkerCount": 1,
+                "isSpot": false,
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "targetWorkerCount": 0,
+                "targetWorkerSizeId": 0
+            }
+        },
+        {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2018-11-01",
-            "name": "[parameters('ignite_web_app_name')]",
+            "name": "[parameters('sites_ignite_azure_demo_web_app_b_name')]",
+            "location": "Central US",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_CG_Ignite_Demo_Plan_B_name'))]"
+            ],
             "kind": "app,linux,container",
             "properties": {
                 "enabled": true,
                 "hostNameSslStates": [
                     {
-                        "name": "[concat(parameters('ignite_web_app_name'), '.azurewebsites.net')]",
+                        "name": "[concat(parameters('sites_ignite_azure_demo_web_app_b_name'), '.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Standard"
                     },
                     {
-                        "name": "[concat(parameters('ignite_web_app_name'), '.scm.azurewebsites.net')]",
+                        "name": "[concat(parameters('sites_ignite_azure_demo_web_app_b_name'), '.scm.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Repository"
                     }
                 ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_CG_Ignite_Demo_Plan_B_name'))]",
                 "reserved": true,
                 "isXenon": false,
                 "hyperV": false,
@@ -38,16 +74,17 @@
                 "hostNamesDisabled": false,
                 "containerSize": 0,
                 "dailyMemoryTimeQuota": 0,
-                "httpsOnly": true,
+                "httpsOnly": false,
                 "redundancyMode": "None"
             }
         },
         {
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2018-11-01",
-            "name": "[concat(parameters('ignite_web_app_name'), '/web')]",
+            "name": "[concat(parameters('sites_ignite_azure_demo_web_app_b_name'), '/web')]",
+            "location": "Central US",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('ignite_web_app_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('sites_ignite_azure_demo_web_app_b_name'))]"
             ],
             "properties": {
                 "numberOfWorkers": 1,
@@ -62,12 +99,14 @@
                     "index.php",
                     "hostingstart.html"
                 ],
-                "linuxFxVersion": "DOCKER|cybergroupignite/runtime:v2.0.0",
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "DOCKER|cybergroupignite/runtime:v1.1.2",
                 "requestTracingEnabled": false,
                 "remoteDebuggingEnabled": false,
                 "httpLoggingEnabled": false,
                 "logsDirectorySizeLimit": 35,
                 "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$ignite-azure-demo-web-app-b",
                 "azureStorageAccounts": {},
                 "scmType": "None",
                 "use32BitWorkerProcess": true,
@@ -115,11 +154,15 @@
         {
             "type": "Microsoft.Web/sites/hostNameBindings",
             "apiVersion": "2018-11-01",
-            "name": "[concat(parameters('ignite_web_app_name'), '/', parameters('ignite_web_app_name'), '.azurewebsites.net')]",
-            "location": "[parameters('location')]",
+            "name": "[concat(parameters('sites_ignite_azure_demo_web_app_b_name'), '/', parameters('sites_ignite_azure_demo_web_app_b_name'), '.azurewebsites.net')]",
+            "location": "Central US",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('ignite_web_app_name'))]"
-            ]
+                "[resourceId('Microsoft.Web/sites', parameters('sites_ignite_azure_demo_web_app_b_name'))]"
+            ],
+            "properties": {
+                "siteName": "ignite-azure-demo-web-app-b",
+                "hostNameType": "Verified"
+            }
         }
     ]
 }
