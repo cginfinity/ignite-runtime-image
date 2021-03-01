@@ -12,6 +12,17 @@
 			"metadata": {
 			"description": "Location for all resources."
 			}
+		},
+		"servicePlanType": {
+			"type": "string",
+			"defaultValue": "B1",
+			"allowedValues": [
+			"B2",
+			"B3"
+			],
+			"metadata": {
+			"description": "App Service Plan"
+			}
 		}
     },
     "variables": {},
@@ -21,6 +32,9 @@
             "apiVersion": "2018-11-01",
             "name": "[parameters('ignite_web_app_name')]",
             "location":  "[parameters('location')]",
+			"sku": {
+				"name": "[parameters('servicePlanType')]"
+				},
             "kind": "app,linux,container",
             "properties": {
                 "enabled": true,
