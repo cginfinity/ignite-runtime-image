@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "App_Service _Plan": {
-            "defaultValue": "Ignite Plan",
+            "defaultValue": "Ignite-Plan",
             "type": "String"
         },
         "Web_App_Name": {
