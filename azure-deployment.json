@@ -89,14 +89,14 @@
             "type": "String"
         },
         "Env_START_MODE": {
-            "type": "string",
+            "type": "String",
             "defaultValue": "POSTGRES",
             "allowedValues": [
                 "POSTGRES",
                 "PROJECT",
                 "BUILD"
             ]
-        },
+        }
     },
     "variables": {},
     "resources": [
