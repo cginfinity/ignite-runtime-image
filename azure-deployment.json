@@ -87,7 +87,16 @@
         "Env_DB_SSL_OPTION": {
             "defaultValue": "true",
             "type": "String"
-        }
+        },
+        "Env_START_MODE": {
+            "type": "string",
+            "defaultValue": "POSTGRES",
+            "allowedValues": [
+                "POSTGRES",
+                "PROJECT",
+                "BUILD"
+            ]
+        },
     },
     "variables": {},
     "resources": [
@@ -156,6 +165,10 @@
                         {
                             "name" : "DOCKER_REGISTRY_SERVER_URL",
                             "value": "https://index.docker.io"
+                        },
+                        {
+                            "name" : "START_MODE",
+                            "value": "[parameters('Env_START_MODE')]"
                         }
                     ]
                 },
