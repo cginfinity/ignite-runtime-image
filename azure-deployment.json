@@ -163,6 +163,10 @@
                             "value": "[parameters('Env_DB_SSL_OPTION')]"
                         },
                         {
+                            "name" : "START_MODE",
+                            "value": "[parameters('Env_START_MODE')]"
+                        },
+                        {
                             "name" : "DOCKER_REGISTRY_SERVER_URL",
                             "value": "https://index.docker.io"
                         }
