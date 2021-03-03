@@ -93,7 +93,6 @@
             "defaultValue": "POSTGRES",
             "allowedValues": [
                 "POSTGRES",
-                "PROJECT",
                 "BUILD"
             ]
         }
