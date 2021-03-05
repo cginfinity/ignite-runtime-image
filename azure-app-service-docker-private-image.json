@@ -232,8 +232,7 @@
                     "iisstart.htm",
                     "hostingstart.html"
                 ],
-                "netFrameworkVersion": "v4.0",
-                "linuxFxVersion": "DOCKER|[parameters('Env_DOCKER_CUSTOM_IMAGE_NAME')]",
+                "linuxFxVersion": "[concat('DOCKER|', parameters('Env_DOCKER_CUSTOM_IMAGE_NAME'))]",
                 "requestTracingEnabled": false,
                 "remoteDebuggingEnabled": false,
                 "httpLoggingEnabled": false,
@@ -243,7 +242,7 @@
                 "scmType": "None",
                 "use32BitWorkerProcess": true,
                 "webSocketsEnabled": false,
-                "alwaysOn": false,
+                "alwaysOn": true,
                 "managedPipelineMode": "Integrated",
                 "virtualApplications": [
                     {
