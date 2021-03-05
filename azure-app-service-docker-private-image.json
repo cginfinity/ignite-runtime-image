@@ -228,16 +228,12 @@
                 "defaultDocuments": [
                     "Default.htm",
                     "Default.html",
-                    "Default.asp",
-                    "index.htm",
                     "index.html",
                     "iisstart.htm",
-                    "default.aspx",
-                    "index.php",
                     "hostingstart.html"
                 ],
                 "netFrameworkVersion": "v4.0",
-                "linuxFxVersion": "DOCKER|cybergroupignite/runtime:v2.0.0",
+                "linuxFxVersion": "DOCKER|[parameters('Env_DOCKER_CUSTOM_IMAGE_NAME')]",
                 "requestTracingEnabled": false,
                 "remoteDebuggingEnabled": false,
                 "httpLoggingEnabled": false,
